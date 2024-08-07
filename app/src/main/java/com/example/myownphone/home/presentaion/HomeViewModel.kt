@@ -21,7 +21,7 @@ class HomeViewModel @Inject constructor(private val homeRepository: HomeReposito
         getLatestPhone()
     }
 
-     fun getLatestPhone() = viewModelScope.launch {
+    fun getLatestPhone() = viewModelScope.launch {
         homeRepository.getPhones().collectLatest { phones ->
             when (phones) {
                 Resource.Empty -> {}

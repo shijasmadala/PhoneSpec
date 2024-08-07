@@ -107,7 +107,7 @@ fun HomeScreen(
                         .navigationBarsPadding(),
                     contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)
                 ) {
-                    items(viewModel.homeState.value.phones, key = { it.slug ?: "" }) { phones ->
+                    items(viewModel.homeState.value.phones.toSet().toList(), key = { it.slug ?: "" }) { phones ->
                         PhoneItem(showPhoneModel = phones, onPhoneItemClick = { selectedPhone ->
                             navController.navigate(
                                 PhoneDetailsScreenDto(
