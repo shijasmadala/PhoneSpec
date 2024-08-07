@@ -3,11 +3,9 @@ package com.example.myownphone.home.presentaion
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.myownphone.home.domain.model.ShowPhoneModel
 import com.example.myownphone.home.domain.repository.HomeRepository
 import com.example.myownphone.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject

@@ -32,8 +32,8 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.myownphone.detail.domain.model.nav_screen.PhoneDetailsScreenDto
-import com.example.myownphone.home.domain.model.FavoriteScreen
 import com.example.myownphone.favorite.presentation.FavoriteViewModel
+import com.example.myownphone.home.domain.model.FavoriteScreen
 import com.example.myownphone.home.presentaion.HomeViewModel
 import com.example.myownphone.home.presentaion.screen.components.CustomErrorScreen
 import com.example.myownphone.home.presentaion.screen.components.HomeHeader
@@ -107,7 +107,9 @@ fun HomeScreen(
                         .navigationBarsPadding(),
                     contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)
                 ) {
-                    items(viewModel.homeState.value.phones.toSet().toList(), key = { it.slug ?: "" }) { phones ->
+                    items(
+                        viewModel.homeState.value.phones.toSet().toList(),
+                        key = { it.slug ?: "" }) { phones ->
                         PhoneItem(showPhoneModel = phones, onPhoneItemClick = { selectedPhone ->
                             navController.navigate(
                                 PhoneDetailsScreenDto(

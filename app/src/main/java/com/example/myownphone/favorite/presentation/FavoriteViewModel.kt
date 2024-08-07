@@ -45,7 +45,7 @@ class FavoriteViewModel @Inject constructor(private val homeRepository: HomeRepo
         }
     }
 
-    fun deletePhoneEntity(showPhoneModel: ShowPhoneModel) = viewModelScope.launch(Dispatchers.IO) {
+    private fun deletePhoneEntity(showPhoneModel: ShowPhoneModel) = viewModelScope.launch(Dispatchers.IO) {
         kotlin.runCatching {
             homeRepository.deletePhoneEntity(showPhoneModel)
         }.onSuccess {
