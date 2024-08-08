@@ -32,6 +32,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.myownphone.detail.domain.model.nav_screen.PhoneDetailsScreenDto
+import com.example.myownphone.favorite.presentation.FavoriteScreenEvent
 import com.example.myownphone.favorite.presentation.FavoriteViewModel
 import com.example.myownphone.home.domain.model.FavoriteScreen
 import com.example.myownphone.home.presentaion.HomeViewModel
@@ -123,6 +124,12 @@ fun HomeScreen(
                         }, onFavClickedItem = {
                             if (it.isFavouriteAdded) {
                                 favoriteViewModel.insertPhoneEntity(showPhoneModel = it)
+                            } else {
+                                favoriteViewModel.onEvent(
+                                    FavoriteScreenEvent.OnDeleteFavoriteItem(
+                                        it
+                                    )
+                                )
                             }
                             isFavClicked = it.isFavouriteAdded
                         },
