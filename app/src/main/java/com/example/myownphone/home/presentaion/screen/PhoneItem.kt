@@ -36,7 +36,6 @@ fun PhoneItem(
     showPhoneModel: ShowPhoneModel,
     onPhoneItemClick: (ShowPhoneModel) -> Unit,
     onFavClickedItem: (ShowPhoneModel) -> Unit,
-    isFavouriteAdded: Boolean,
 ) {
 
     Card(
@@ -67,7 +66,6 @@ fun PhoneItem(
                     modifier = Modifier
                         .padding(8.dp)
                         .clickable {
-                            showPhoneModel.isFavouriteAdded = !isFavouriteAdded
                             onFavClickedItem(showPhoneModel)
                         }
                 )

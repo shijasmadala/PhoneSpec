@@ -32,8 +32,6 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.myownphone.detail.domain.model.nav_screen.PhoneDetailsScreenDto
-import com.example.myownphone.favorite.presentation.FavoriteScreenEvent
-import com.example.myownphone.favorite.presentation.FavoriteViewModel
 import com.example.myownphone.home.domain.model.FavoriteScreen
 import com.example.myownphone.home.presentaion.HomeViewModel
 import com.example.myownphone.home.presentaion.screen.components.CustomErrorScreen
@@ -46,14 +44,9 @@ import com.example.myownphone.home.presentaion.screen.components.SearchPhoneView
 fun HomeScreen(
     navController: NavController,
     viewModel: HomeViewModel = hiltViewModel(),
-    favoriteViewModel: FavoriteViewModel = hiltViewModel()
 ) {
     var searchValue by remember {
         mutableStateOf("")
-    }
-
-    var isFavClicked by remember {
-        mutableStateOf(false)
     }
 
     Column(
@@ -110,30 +103,23 @@ fun HomeScreen(
                 ) {
                     items(
                         viewModel.homeState.value.phones.toSet().toList(),
-                        key = { it.slug ?: "" }) { phones ->
-                        PhoneItem(showPhoneModel = phones, onPhoneItemClick = { selectedPhone ->
-                            navController.navigate(
-                                PhoneDetailsScreenDto(
-                                    detail = selectedPhone.detail,
-                                    image = selectedPhone.image,
-                                    phoneName = selectedPhone.phoneName,
-                                    slug = selectedPhone.slug
-                                )
-                            )
-
-                        }, onFavClickedItem = {
-                            if (it.isFavouriteAdded) {
-                                favoriteViewModel.insertPhoneEntity(showPhoneModel = it)
-                            } else {
-                                favoriteViewModel.onEvent(
-                                    FavoriteScreenEvent.OnDeleteFavoriteItem(
-                                        it
+                        key = { it.hashCode() }) { phones ->
+                        PhoneItem(
+                            showPhoneModel = phones,
+                            onPhoneItemClick = { selectedPhone ->
+                                navController.navigate(
+                                    PhoneDetailsScreenDto(
+                                        detail = selectedPhone.detail,
+                                        image = selectedPhone.image,
+                                        phoneName = selectedPhone.phoneName,
+                                        slug = selectedPhone.slug
                                     )
                                 )
-                            }
-                            isFavClicked = it.isFavouriteAdded
-                        },
-                            isFavouriteAdded = isFavClicked
+
+                            },
+                            onFavClickedItem = {
+                                viewModel.toggleFavorite(it)
+                            },
                         )
                     }
                 }
