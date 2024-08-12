@@ -7,13 +7,13 @@ import com.example.myownphone.home.data.entity.PhoneEntity
 
 fun Phone.toShowPhoneModel(): ShowPhoneModel {
     return ShowPhoneModel(
-        detail = detail, image = image, phoneName = phoneName, slug = slug
+        detail = detail, image = image, phoneName = phoneName, slug = slug, favorites = favorites, hits = hits
     )
 }
 
 fun SearchDetailDtoItem.toShowPhoneModel(): ShowPhoneModel {
     return ShowPhoneModel(
-        detail = brand, image = image, phoneName = phoneName, slug = slug,
+        detail = brand, image = image, phoneName = phoneName, slug = slug, favorites = 0, hits = 0
     )
 
 }
@@ -34,6 +34,8 @@ fun PhoneEntity.toPhoneEntity(): ShowPhoneModel {
         phoneName = phoneName,
         image = image,
         slug = slug,
-        isFavouriteAdded = isFavouriteAdded
+        isFavouriteAdded = isFavouriteAdded,
+        favorites = 0,
+        hits = 0
     )
 }

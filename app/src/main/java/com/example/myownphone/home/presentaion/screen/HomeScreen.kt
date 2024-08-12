@@ -38,6 +38,7 @@ import com.example.myownphone.home.presentaion.screen.components.CustomErrorScre
 import com.example.myownphone.home.presentaion.screen.components.HomeHeader
 import com.example.myownphone.home.presentaion.screen.components.InputChipFilterSearchComponent
 import com.example.myownphone.home.presentaion.screen.components.SearchPhoneView
+import com.example.myownphone.top_by.domain.model.TopByFansScreen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -79,13 +80,24 @@ fun HomeScreen(
         ) {
             InputChipFilterSearchComponent(
                 title = "Top By Interest", icon = Icons.Filled.ShoppingCart, onChipClick = {
-
+                    navController.navigate(
+                        TopByFansScreen(
+                            category = "top-by-interest",
+                            title = "Top by interest"
+                        )
+                    )
                 }, iconColor = Color.Black
             )
             Spacer(modifier = Modifier.width(8.dp))
             InputChipFilterSearchComponent(
-                title = "Top By Fans", icon = Icons.Filled.Favorite, onChipClick = {
-
+                title = "Top By Fans", icon = Icons.Filled.Favorite,
+                onChipClick = {
+                    navController.navigate(
+                        TopByFansScreen(
+                            category = "top-by-fans",
+                            title = "Top by fans"
+                        )
+                    )
                 }, iconColor = Color.Red
             )
         }

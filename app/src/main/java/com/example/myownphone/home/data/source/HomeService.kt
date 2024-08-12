@@ -7,8 +7,8 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 
 interface HomeService {
-    @GET("latest")
-    suspend fun getLatestPhones() : ApiResponse<ShowPhoneResponseDto>
+    @GET("{category}")
+    suspend fun getLatestPhones(@Path("category") category: String) : ApiResponse<ShowPhoneResponseDto>
 
     @GET("{phone_id}")
     suspend fun getPhoneDetails(@Path("phone_id") phoneId : String) : ApiResponse<PhoneDetailsShowDto>

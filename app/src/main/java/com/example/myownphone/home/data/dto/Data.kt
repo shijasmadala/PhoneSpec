@@ -1,11 +1,10 @@
-package com.example.myphone.home.data.dto
+package com.example.myownphone.home.data.dto
 
 
+import android.os.Parcelable
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import kotlinx.parcelize.Parcelize
-import android.os.Parcelable
-import com.example.myownphone.home.data.dto.Phone
 
 @JsonClass(generateAdapter = true)
 @Parcelize

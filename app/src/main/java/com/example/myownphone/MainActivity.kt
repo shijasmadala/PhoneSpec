@@ -10,11 +10,12 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import com.example.myownphone.detail.domain.model.nav_screen.PhoneDetailsScreenDto
 import com.example.myownphone.detail.presentation.screen.PhoneDetailsScreen
+import com.example.myownphone.favorite.presentation.screen.FavoriteScreen
 import com.example.myownphone.home.domain.model.FavoriteScreen
 import com.example.myownphone.home.domain.model.HomeScreen
 import com.example.myownphone.home.domain.model.ShowPhoneModel
-import com.example.myownphone.favorite.presentation.screen.FavoriteScreen
 import com.example.myownphone.home.presentaion.screen.HomeScreen
+import com.example.myownphone.top_by.domain.model.TopByFansScreen
 import com.example.myownphone.ui.theme.MyOwnPhoneTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -37,7 +38,14 @@ class MainActivity : ComponentActivity() {
                         val image = args.image
                         val phoneName = args.phoneName
                         val slug = args.slug
-                        val showPhoneModel = ShowPhoneModel(detail = detail, image, phoneName, slug)
+                        val showPhoneModel = ShowPhoneModel(
+                            detail = detail,
+                            image,
+                            phoneName,
+                            slug,
+                            favorites = 0,
+                            hits = 0
+                        )
                         PhoneDetailsScreen(
                             navController = navController,
                             showPhoneModel = showPhoneModel
@@ -46,6 +54,14 @@ class MainActivity : ComponentActivity() {
 
                     composable<FavoriteScreen> {
                         FavoriteScreen(navController)
+                    }
+
+                    composable<TopByFansScreen> {
+                        val args = it.toRoute<TopByFansScreen>()
+                        com.example.myownphone.top_by.presentation.screen.TopByFansScreen(
+                            category = args.category,
+                            title = args.title
+                        )
                     }
                 }
             }

@@ -2,7 +2,6 @@ package com.example.myownphone.home.data.dto
 
 
 import android.os.Parcelable
-import com.example.myphone.home.data.dto.Data
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import kotlinx.parcelize.Parcelize

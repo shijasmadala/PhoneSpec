@@ -16,5 +16,9 @@ data class Phone(
     @Json(name = "phone_name")
     val phoneName: String,
     @Json(name = "slug")
-    val slug: String
+    val slug: String,
+    @Json(name = "hits")
+    val hits: Int?,
+    @Json(name = "favorites")
+    val favorites: Int?
 ) : Parcelable

@@ -9,5 +9,7 @@ data class ShowPhoneModel(
     val image: String?,
     val phoneName: String?,
     val slug: String?,
-    var isFavouriteAdded : Boolean = false
+    var isFavouriteAdded : Boolean = false,
+    val hits: Int?,
+    val favorites: Int?
 ) : Parcelable

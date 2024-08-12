@@ -6,7 +6,7 @@ import com.example.myownphone.utils.Resource
 import kotlinx.coroutines.flow.Flow
 
 interface HomeRepository {
-    suspend fun getPhones(): Flow<Resource<List<ShowPhoneModel>>>
+    suspend fun getPhones(category: String): Flow<Resource<List<ShowPhoneModel>>>
 
     suspend fun searchPhones(query: String): Flow<Resource<List<ShowPhoneModel>>>
 

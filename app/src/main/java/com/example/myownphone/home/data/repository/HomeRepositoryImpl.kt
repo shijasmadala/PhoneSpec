@@ -25,9 +25,9 @@ class HomeRepositoryImpl @Inject constructor(
     private val phoneDao: PhoneDao
 ) :
     HomeRepository {
-    override suspend fun getPhones(): Flow<Resource<List<ShowPhoneModel>>> = flow {
+    override suspend fun getPhones(category: String): Flow<Resource<List<ShowPhoneModel>>> = flow {
         emit(Resource.Loading)
-        homeService.getLatestPhones().suspendOnSuccess {
+        homeService.getLatestPhones(category).suspendOnSuccess {
             val response = this.data
             if (response.status && response != null) {
                 val phoneData = response.data.phones.map { it.toShowPhoneModel() }
