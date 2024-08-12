@@ -34,6 +34,7 @@ import com.example.myownphone.home.domain.model.ShowPhoneModel
 @Composable
 fun FavoriteItem(
     showPhoneModel: ShowPhoneModel,
+    onItemClicked: (ShowPhoneModel) -> Unit,
     onFavoriteCheckedItem: (ShowPhoneModel) -> Unit
 ) {
 
@@ -43,7 +44,7 @@ fun FavoriteItem(
             .fillMaxWidth(),
         colors = CardDefaults.cardColors(containerColor = Color.White),
         onClick = {
-
+            onItemClicked.invoke(showPhoneModel)
         }
     ) {
 

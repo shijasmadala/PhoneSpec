@@ -14,9 +14,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.example.myownphone.detail.domain.model.nav_screen.PhoneDetailsScreenDto
 import com.example.myownphone.favorite.presentation.FavoriteScreenEvent
 import com.example.myownphone.favorite.presentation.FavoriteViewModel
-import com.example.myownphone.home.domain.model.HomeScreen
 import com.example.myownphone.home.presentaion.screen.components.HomeHeader
 
 @Composable
@@ -48,7 +48,17 @@ fun FavoriteScreen(
                                 phone = favClickedItem
                             )
                         )
-                    })
+                    },
+                        onItemClicked = { selectedItem ->
+                            navController.navigate(
+                                PhoneDetailsScreenDto(
+                                    detail = selectedItem.detail,
+                                    image = selectedItem.image,
+                                    phoneName = selectedItem.phoneName,
+                                    slug = selectedItem.slug
+                                )
+                            )
+                        })
                 }
             }
         }
