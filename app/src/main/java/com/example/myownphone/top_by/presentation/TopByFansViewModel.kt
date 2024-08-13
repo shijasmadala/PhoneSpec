@@ -31,7 +31,8 @@ class TopByFansViewModel @Inject constructor(private val homeRepository: HomeRep
                 }
 
                 is Resource.Success -> {
-                    topByState.value = topByState.value.copy(topByPhones = phones.value)
+                    topByState.value =
+                        topByState.value.copy(topByPhones = phones.value, isLoading = false)
                 }
             }
         }

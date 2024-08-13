@@ -60,7 +60,8 @@ class MainActivity : ComponentActivity() {
                         val args = it.toRoute<TopByFansScreen>()
                         com.example.myownphone.top_by.presentation.screen.TopByFansScreen(
                             category = args.category,
-                            title = args.title
+                            title = args.title,
+                            navController
                         )
                     }
                 }

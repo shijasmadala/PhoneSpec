@@ -1,5 +1,6 @@
 package com.example.myownphone.home.data.repository
 
+import android.util.Log
 import com.example.myownphone.detail.domain.model.dto.PhoneDetailShowModel
 import com.example.myownphone.home.data.source.HomeService
 import com.example.myownphone.home.data.source.PhoneDao
@@ -40,7 +41,6 @@ class HomeRepositoryImpl @Inject constructor(
             }
         }.suspendOnException {
             emit(Resource.Error(Constants.NO_INTERNET_ERROR_MESSAGE))
-
         }
     }
 
@@ -64,26 +64,27 @@ class HomeRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun getPhoneItemDetails(phoneId: String): Flow<Resource<PhoneDetailShowModel>> = flow{
-        emit(Resource.Loading)
-        homeService.getPhoneDetails(phoneId).suspendOnSuccess {
-            val response = this.data
-            if (response.status){
-                val phoneData = response.toPhoneDetailsDto()
-                emit(Resource.Success(phoneData))
-            } else {
-                emit(Resource.Error("Unable Fetch Details"))
-            }
-        }.suspendOnError {
-            when (this.statusCode) {
-                StatusCode.InternalServerError -> emit(Resource.Error(Constants.SERVER_ERROR))
-                else -> emit(Resource.Error(Constants.GENERIC_ERROR_MESSAGE))
-            }
-        }.suspendOnException {
-            emit(Resource.Error(Constants.NO_INTERNET_ERROR_MESSAGE))
+    override suspend fun getPhoneItemDetails(phoneId: String): Flow<Resource<PhoneDetailShowModel>> =
+        flow {
+            emit(Resource.Loading)
+            homeService.getPhoneDetails(phoneId).suspendOnSuccess {
+                val response = this.data
+                if (response.status) {
+                    val phoneData = response.toPhoneDetailsDto()
+                    emit(Resource.Success(phoneData))
+                } else {
+                    emit(Resource.Error("Unable Fetch Details"))
+                }
+            }.suspendOnError {
+                when (this.statusCode) {
+                    StatusCode.InternalServerError -> emit(Resource.Error(Constants.SERVER_ERROR))
+                    else -> emit(Resource.Error(Constants.GENERIC_ERROR_MESSAGE))
+                }
+            }.suspendOnException {
+                emit(Resource.Error(Constants.NO_INTERNET_ERROR_MESSAGE))
 
+            }
         }
-    }
 
     override suspend fun insertPhoneEntity(showPhoneModel: ShowPhoneModel) {
         kotlin.runCatching {

@@ -10,13 +10,13 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class Phone(
     @Json(name = "detail")
-    val detail: String,
+    val detail: String?,
     @Json(name = "image")
-    val image: String,
+    val image: String?,
     @Json(name = "phone_name")
-    val phoneName: String,
+    val phoneName: String?,
     @Json(name = "slug")
-    val slug: String,
+    val slug: String?,
     @Json(name = "hits")
     val hits: Int?,
     @Json(name = "favorites")
